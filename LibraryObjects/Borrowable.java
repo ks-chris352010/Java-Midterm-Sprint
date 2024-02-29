@@ -1,6 +1,6 @@
 package LibraryObjects;
 
 public interface Borrowable {
-    void borrowBook(Book book);
-    void returnBook(Book book);
+    void borrowBook(Patron patron);
+    void returnBook(Patron patron);
 }

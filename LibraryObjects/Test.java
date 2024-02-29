@@ -83,17 +83,17 @@ public class Test {
         // Test Borrow and Return:
         System.out.println("Inital: " + book.getStatus());
 
-        book.borrowBook(patron);
-
-        System.out.println("---------------------------------------------------------");
-
-        System.out.println("Borrowed: " + book.getStatus());
-
-        System.out.println("---------------------------------------------------------");
-
         book.returnBook(patron);
 
+        System.out.println("---------------------------------------------------------");
+
         System.out.println("Returned: " + book.getStatus());
+
+        System.out.println("---------------------------------------------------------");
+
+        book.borrowBook(patron);
+
+        System.out.println("Borrowed: " + book.getStatus());
             
         System.out.println("---------------------------------------------------------");
 
@@ -165,17 +165,17 @@ public class Test {
         System.out.println("---------------------------------------------------");
 
         System.out.println("Borrow a book from the library:");
-        library.borrowBook(book, patron2);
+        library.borrowBook(book5, patron2);
         System.out.println("Books Borrowed by " + patron2.getName() + " after borrowing a book:");
         System.out.println(patron2.getBorrowedBooksAsString());
         System.out.println("---------------------------------------------------");
         
         // Return a book to the library
         System.out.println("Return a book to the library:");
-        library.returnBook(book, patron2);
+        library.returnBook(book5, patron2);
         System.out.println("---------------------------------------------------");
         // Display updated list of borrowed books for patron2
-        
+
         System.out.println("Books Borrowed by " + patron2.getName() + " after returning a book:");
         System.out.println(patron2.getBorrowedBooksAsString());
         System.out.println("---------------------------------------------------");
