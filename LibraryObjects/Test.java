@@ -24,7 +24,7 @@ public class Test {
 
         // Create a patron
         Patron patron = new Patron("Jerimiah kumingbach", "146 Pussiwillow Drive", "420-6969");
-        Patron patron2 = new Patron("Justin Walsh", "132 Charming Ave.", "1-800-666-5088");
+        Patron patron2 = new Patron("Justin Whalen", "132 Charming Ave.", "1-800-666-5088");
         Patron patron3 = new Patron("Mason Brumsey", "42 Main St.", "709-649-5232");
         Patron patron4 = new Patron("Josh", "Mcdonalds", "709-649-42");
         Patron patron5 = new Patron("Jeremy Saunders", "42 Kuntucky ave", "1 (709) 721-4523");
@@ -40,8 +40,8 @@ public class Test {
         author4.addBook(book9);
         author5.addBook(book10);
 
-        patron.borrowBook(book);
-        patron.borrowBook(book4);
+        book.borrowBook(patron);
+        book4.borrowBook(patron);;
 
         // Add books to the library
         library.addBook(book);
@@ -68,59 +68,70 @@ public class Test {
         library.addPatron(patron5);
 
         // Test Book Class:
-        System.out.println("Book class test: ");
+        System.out.println("\nBook class test: ");
+        System.out.println("---------------------------------------------------------");
         System.out.println("Title: " + book.getTitle());
+        System.out.println("---------------------------------------------------------");
         System.out.println("ISBN: " + book.getISBN());
+        System.out.println("---------------------------------------------------------");
         System.out.println("Publisher: " + book.getPublisher());
-        System.out.println("Number of copies: " + book.getNumberOfCopies());
-        
-        System.out.println("-----------------");
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Number of copies: " + book.getNumberOfCopies());    
+        System.out.println("---------------------------------------------------------");
 
 
         // Test Borrow and Return:
         System.out.println("Inital: " + book.getStatus());
-        book.borrowBook();
+
+        book.borrowBook(patron);
+
+        System.out.println("---------------------------------------------------------");
+
         System.out.println("Borrowed: " + book.getStatus());
-        book.returnBook();
+
+        System.out.println("---------------------------------------------------------");
+
+        book.returnBook(patron);
+
         System.out.println("Returned: " + book.getStatus());
             
-        System.out.println("-----------------");
-        System.out.println("Author class test:");
-        
-        // Test Author Class:
+        System.out.println("---------------------------------------------------------");
+
+        System.out.println("\nAuthor class test:");
+        System.out.println("---------------------------------------------------------");
         System.out.println("Name: " + author.getName());
+        System.out.println("---------------------------------------------------------");
         System.out.println("Date of birth:" + author.getDateOfBirthAsString());
+        System.out.println("---------------------------------------------------------");
         System.out.println("" + author.toString());
+        System.out.println("---------------------------------------------------------");
         System.out.println("" + author.getBooksWrittenAsString());
-
-        System.out.println("-----------------");
-        System.out.println("Patron class test:");
-
-        // Display patron information
-        System.out.println("Patron Name: " + patron.getName());
-        System.out.println("Patron Address: " + patron.getAddress());
-        System.out.println("Patron Phone Number: " + patron.getPhoneNumber());
-        System.out.println("Books Borrowed:");
-
-        List<Book> borrowedBooks = patron.getBorrowedBooks();
-        for (Book tempbook : borrowedBooks) {
-            System.out.println("- " + tempbook.toString());
-        }
-
-        // Return a book
+        System.out.println("---------------------------------------------------------");
         
-        patron.returnBook(book4);
+        System.out.println("\nPatron class test:");
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Patron Name: " + patron.getName());
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Patron Address: " + patron.getAddress());
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Patron Phone Number: " + patron.getPhoneNumber());
+        System.out.println("---------------------------------------------------");
 
-        // Display updated list of borrowed books
-        System.out.println("\nAfter returning a book, Books Borrowed:");
-        borrowedBooks = patron.getBorrowedBooks();
-        for (Book tempbook : borrowedBooks) {
-            System.out.println("- " + tempbook.toString());
-        }
+        System.out.println("Books Borrowed:");
+        System.out.println(patron.getBorrowedBooksAsString());
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Returning book:");
+        book4.returnBook(patron);
+        System.out.println("---------------------------------------------------------");
+
+        System.out.println("After returning a book, Books Borrowed:");
+        System.out.println(patron.getBorrowedBooksAsString());
+        System.out.println("---------------------------------------------------------");
 
         // Testing library:
-        System.out.println("-----------------");
-        System.out.println("Library class test:");
+
+        System.out.println("\nLibrary class test:");
+        System.out.println("---------------------------------------------------");
 
         // Search books by title
         System.out.println("Search Books by Title 'Harry':");
@@ -128,6 +139,7 @@ public class Test {
         for (Book b : searchResult) {
             System.out.println("- " + b.getTitle());
         }
+        System.out.println("---------------------------------------------------");
 
         // Search books by author
         System.out.println("Search Books by Author 'Fitzgerald':");
@@ -135,6 +147,7 @@ public class Test {
         for (Book b : searchResult) {
             System.out.println("- " + b.getTitle() + " by " + b.getAuthor().getName());
         }
+        System.out.println("---------------------------------------------------");
 
         // Search books by ISBN
         System.out.println("Search Book by ISBN '1231452151':");
@@ -144,20 +157,27 @@ public class Test {
         } else {
             System.out.println("Book not found.");
         }
+        System.out.println("---------------------------------------------------");
 
         // Borrow a book from the library
+        System.out.println("Inital books borrowed:");
+        System.out.println(patron2.getBorrowedBooksAsString());
+        System.out.println("---------------------------------------------------");
+
         System.out.println("Borrow a book from the library:");
         library.borrowBook(book, patron2);
-
+        System.out.println("Books Borrowed by " + patron2.getName() + " after borrowing a book:");
+        System.out.println(patron2.getBorrowedBooksAsString());
+        System.out.println("---------------------------------------------------");
+        
         // Return a book to the library
         System.out.println("Return a book to the library:");
         library.returnBook(book, patron2);
-
+        System.out.println("---------------------------------------------------");
         // Display updated list of borrowed books for patron2
+        
         System.out.println("Books Borrowed by " + patron2.getName() + " after returning a book:");
-        List<Book> borrowedBooksPatron2 = patron2.getBorrowedBooks();
-        for (Book b : borrowedBooksPatron2) {
-            System.out.println("- " + b.getTitle());
-        }
+        System.out.println(patron2.getBorrowedBooksAsString());
+        System.out.println("---------------------------------------------------");
     }
 }

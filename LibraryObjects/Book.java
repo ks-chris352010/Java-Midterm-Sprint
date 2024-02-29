@@ -153,9 +153,10 @@ public class Book implements Borrowable {
      * Allows a patron to borrow the book if it is available.
      * Prints a message indicating the success or failure of the operation.
      */
-    public void borrowBook() {
+    public void borrowBook(Patron patron) {
         if (status == Status.AVAILABLE) {
             status = Status.CHECKED_OUT;
+            patron.addBook(this);
             System.out.println("Book checked out successfully.");
         } else {
             System.out.println("Book is not available for borrowing.");
@@ -166,9 +167,10 @@ public class Book implements Borrowable {
      * Allows a patron to return the book if it is checked out.
      * Prints a message indicating the success or failure of the operation.
      */
-    public void returnBook() {
+    public void returnBook(Patron patron) {
         if (status == Status.CHECKED_OUT) {
             status = Status.AVAILABLE;
+            patron.removeBook(this);
             System.out.println("Book returned successfully.");
         } else {
             System.out.println("Cannot return a book that is not checked out.");

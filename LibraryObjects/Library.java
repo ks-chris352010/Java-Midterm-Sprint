@@ -76,13 +76,7 @@ public class Library {
      * @param patron The patron borrowing the book.
      */
     public void borrowBook(Book book, Patron patron) {
-        if (book.getStatus() == Status.AVAILABLE) {
-            book.setStatus(Status.CHECKED_OUT);
-            patron.borrowBook(book);
-            System.out.println("Book '" + book.getTitle() + "' checked out successfully by " + patron.getName());
-        } else {
-            System.out.println("Book '" + book.getTitle() + "' is not available for borrowing.");
-        }
+        book.borrowBook(patron);
     }
 
     /**
@@ -92,13 +86,7 @@ public class Library {
      * @param patron The patron returning the book.
      */
     public void returnBook(Book book, Patron patron) {
-        if (book.getStatus() == Status.CHECKED_OUT) {
-            book.setStatus(Status.AVAILABLE);
-            patron.returnBook(book);
-            System.out.println("Book '" + book.getTitle() + "' returned successfully by " + patron.getName());
-        } else {
-            System.out.println("Book '" + book.getTitle() + "' is not checked out.");
-        }
+        book.returnBook(patron);
     }
 
     /**

@@ -65,6 +65,22 @@ public class Patron {
     }
 
     /**
+     * Gets the list of books borrowed by the patron as a string.
+     *
+     * @return A list of books borrowed by the patron as a string.
+     */
+    public String getBorrowedBooksAsString() {
+        if (borrowedBooks.isEmpty()) {
+            return "No books checked out.";
+        }
+        StringBuilder booksString = new StringBuilder();
+        for (Book book : borrowedBooks) {
+            booksString.append(book.getTitle()).append(", ");
+        }
+        return booksString.substring(0, booksString.length() - 2);
+    }
+
+    /**
      * Sets the name of the patron.
      *
      * @param name The new name of the patron.
@@ -105,7 +121,7 @@ public class Patron {
      *
      * @param book The book to be borrowed.
      */
-    public void borrowBook(Book book) {
+    public void addBook(Book book) {
         borrowedBooks.add(book);
     }
 
@@ -114,7 +130,7 @@ public class Patron {
      *
      * @param book The book to be returned.
      */
-    public void returnBook(Book book) {
+    public void removeBook(Book book) {
         borrowedBooks.remove(book);
     }
 }
